@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -14,15 +16,13 @@ public class Road {
     private int maxSpeed;
     private int speed;
     private String name;
-    private float lat;
-    private float lng;
+    private Coordinates[] coords;
 
-    public Road(String name, int maxSpeed, float lat, float lng) {
+    public Road(String name, int maxSpeed, Coordinates[] coords) {
         this.name = name;
         this.maxSpeed = maxSpeed;
         this.speed = maxSpeed;
-        this.lat = lat;
-        this.lng = lng;
+        this.coords = coords;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Road {
 
             // Main item
             JSONObject item = new JSONObject()
-                .put("type", "fuss")
+                .put("type", "trafficDensity")
                 .put("isPattern", "false")
                 .put("id", name.replaceAll(" ", "_").toLowerCase());
 
@@ -68,20 +68,27 @@ public class Road {
                     .put("type", "unix timestamp")
                     .put("value", System.currentTimeMillis()));
 
+            // Add all locations to the array
+            JSONArray jsonArrayLocations = new JSONArray();
+            for(Coordinates coordinate : coords) {
+                jsonArrayLocations.put(
+                        new JSONArray()
+                                .put(new JSONObject()
+                                        .put("name", "latitude")
+                                        .put("type", "float")
+                                        .put("value", coordinate.getLat()))
+                                .put(new JSONObject()
+                                        .put("name", "longitude")
+                                        .put("type", "float")
+                                        .put("value", coordinate.getLng())
+                        ));
+            }
+
             // Add the location
             attributes.put(new JSONObject()
                     .put("name", "location")
                     .put("type", "array")
-                    .put("value", new JSONArray()
-                            .put(new JSONObject()
-                                    .put("name", "latitude")
-                                    .put("type", "float")
-                                    .put("value", lat))
-                            .put(new JSONObject()
-                                    .put("name", "longitude")
-                                    .put("type", "float")
-                                    .put("value", lng))
-                    ));
+                    .put("value", jsonArrayLocations));
 
             // Set attributes on item
             item.put("attributes", attributes);
