@@ -99,7 +99,7 @@ public class Road {
             return json.toString();
 
         } catch (JSONException e) {
-            System.out.println("Could not create the JSON object to POST");
+            System.err.println("Could not create the JSON object to POST");
             e.printStackTrace();
         }
         return null;

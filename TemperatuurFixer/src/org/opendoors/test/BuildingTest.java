@@ -1,13 +1,12 @@
 package org.opendoors.test;
 
 import org.junit.Test;
-import org.opendoors.CreateObject;
-import org.opendoors.Main;
+import org.opendoors.Building;
 
 /**
  * Created by Ruben on 4-6-2015.
  */
-public class CreateObjectTest {
+public class BuildingTest {
 
     /**
      * Test if a correctly made object works
@@ -15,6 +14,6 @@ public class CreateObjectTest {
      */
     @Test
     public void testNewGoodObject() throws Exception {
-        CreateObject object = new CreateObject(0, (float) 52.223852, (float) 6.885874);
+        Building object = new Building("ITC gebouw", (float) 52.223852, (float) 6.885874);
     }
 }

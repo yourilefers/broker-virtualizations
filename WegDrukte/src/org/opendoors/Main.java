@@ -72,7 +72,7 @@ public class Main {
         Random r = new Random();
         int random = r.nextInt(ROADS.length);
 
-        // Debug
+        // DEBUG
         if(Main.DEBUG) System.out.println("Item int -> " + random);
 
         // Never return the same sensor twice (or more..)

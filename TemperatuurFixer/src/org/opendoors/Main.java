@@ -5,56 +5,79 @@ import java.util.Calendar;
 import java.util.Random;
 
 public class Main {
+
+    // DEBUG
     public final static boolean DEBUG = false;
+    public final static boolean NETWORK_REQUEST = true;
+
+    // The URL
     public final static String REQUEST_URL = "http://uitdaging.yourilefers.nl:1026/ngsi10/updateContext";
 
-    public final static int ITEMS = 3;
-    public final static String ITC = "ITC gebouw";
-    public final static String STATION = "Station";
-    public final static String GLASBAK = "Glasbak";
 
+    // The list of buildings
+    public final static Building[] BUILDINGS = {
+            new Building("ITC gebouw", (float) 52.223852, (float) 6.885874),
+            new Building("Station", (float) 52.222387, (float) 6.890195),
+            new Building("Glasbak", (float) 52.219623, (float) 6.889610)
+    };
+
+    // The last random item
     private static int lastItem = -1;
 
     public static void main(String[] args) {
-	    SendRequest request = new SendRequest();
+        // Setup vars
+        SendRequest request = new SendRequest();
+        Random r = new Random();
+
+        // Timings
+        int sec = 1000;
+        int minSleep = 1 * sec;
+        int maxSleep = 10 * sec;
 
         while(true) {
+
+            // Current time
             long millis = System.currentTimeMillis();
-            String item = getItem();
+
+            // The item to send
+            Building item = getItem();
+
             //code to run
             System.out.print("Making call... " + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()) + " for sensor: " + item);
             request.doRequest(item);
             System.out.println(" / Done... " + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+
+            // DEBUG
+            if(DEBUG) System.out.println("\n----------------------------------------------------------------------------------------------------\n");
+
+            // Sleep
             try {
-                Thread.sleep(10000 - millis % 1000);
+                Thread.sleep(r.nextInt(maxSleep - minSleep) + minSleep - millis % 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }//While
+
+        }
     }
 
     /**
      * Get the sensor that has to be updated (never the same twice)
      * @return sensor that has to be updated
      */
-    private static String getItem() {
+    private static Building getItem() {
+
+        // The randomizer to use
         Random r = new Random();
-        int random = r.nextInt(ITEMS);
+        int random = r.nextInt(BUILDINGS.length);
 
-        if(Main.DEBUG)
-            System.out.println("Item int -> " + random);
+        // DEBUG
+        if(Main.DEBUG) System.out.println("Item int -> " + random);
 
-        //Never return the same sensor twice (or more..)
-        if(random == lastItem)
-            return getItem();
-        else
-            lastItem = random;
+        // Never return the same sensor twice (or more..)
+        if(random == lastItem) return getItem();
+        else lastItem = random;
 
-        if(random == 0)
-            return ITC;
-        else if(random == 1)
-            return STATION;
-        else
-            return GLASBAK;
+        // Return a Building
+        return BUILDINGS[random];
     }
 }
