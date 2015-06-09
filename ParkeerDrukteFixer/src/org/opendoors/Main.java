@@ -84,5 +84,6 @@ public class Main {
 
         // Return a garage
         return GARAGES[random];
+
     }
 }

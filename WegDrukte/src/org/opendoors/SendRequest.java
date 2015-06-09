@@ -2,7 +2,6 @@ package org.opendoors;
 
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -17,71 +16,86 @@ import java.io.UnsupportedEncodingException;
  * Created by Ruben on 28-5-2015.
  */
 public class SendRequest {
+
+    // The client to use
     private HttpClient httpClient;
-    private CreateObject west, zuid, haaks, hengelose, deurninger;
 
     public SendRequest() {
-        httpClient = HttpClientBuilder.create().build(); //Use this instead
-        west = new CreateObject(org.opendoors.Main.ROAD_WESTERVAL, 80,(float) 52.218364, (float) 6.869316);
-        zuid = new CreateObject(org.opendoors.Main.ROAD_ZUIDERVAL, 80, (float) 52.208590, (float) 6.889442);
-        haaks = new CreateObject(org.opendoors.Main.ROAD_HAAKSBERGERSTRAAT, 80, (float) 52.210550, (float) 6.878260);
-        hengelose = new CreateObject(org.opendoors.Main.ROAD_HENGELOSESTRAAT, 50, (float) 52.227166, (float) 6.878294);
-        deurninger = new CreateObject(org.opendoors.Main.ROAD_DEURNINGERSTRAAT, 50, (float) 52.229364, (float) 6.889527);
+
+        // Setup http client
+        httpClient = HttpClientBuilder
+                .create()
+                .build();
+
     }
 
     /**
      * Do a request to Orion for a given object
-     * @param item (which sensor needs to be updated)
+     * @param road (which sensor needs to be updated)
      */
-    public void doRequest(String item) {
-        HttpPost postRequest = new HttpPost(org.opendoors.Main.REQUEST_URL);
-        StringEntity input = null;
+    public void doRequest(Road road) {
+
+        // Setup post request
+        HttpPost postRequest = new HttpPost(Main.REQUEST_URL);
+
         try {
-            switch (item) {
-                case org.opendoors.Main.ROAD_WESTERVAL: input = new StringEntity(west.newObject()); break;
-                case org.opendoors.Main.ROAD_ZUIDERVAL: input = new StringEntity(zuid.newObject()); break;
-                case org.opendoors.Main.ROAD_HAAKSBERGERSTRAAT: input = new StringEntity(haaks.newObject()); break;
-                case org.opendoors.Main.ROAD_HENGELOSESTRAAT: input = new StringEntity(hengelose.newObject()); break;
-                default: input = new StringEntity(deurninger.newObject()); break;
-            }
 
-            if(org.opendoors.Main.NETWORK_REQUEST) {
-                input.setContentType("application/json");
-                postRequest.setEntity(input);
+            // Setup input
+            StringEntity input = new StringEntity(road.newObject());
 
-                HttpResponse response = httpClient.execute(postRequest);
+            // May I make a request?
+            if(Main.NETWORK_REQUEST) {
+                try {
 
-                if (response.getStatusLine().getStatusCode() != 200) {
-                    throw new RuntimeException("Failed : HTTP error code : "
-                            + response.getStatusLine().getStatusCode());
-                }
+                    // Set content type
+                    input.setContentType("application/json");
+                    postRequest.setEntity(input);
 
-                BufferedReader br = new BufferedReader(
-                        new InputStreamReader((response.getEntity().getContent())));
+                    // Make the request
+                    HttpResponse response = httpClient.execute(postRequest);
 
-                String output;
-                StringBuffer totalOutput = new StringBuffer();
-
-                if (Main.DEBUG) {
-                    System.out.println("Output from Server .... \n");
-                    while ((output = br.readLine()) != null) {
-                        System.out.println(output);
-                        totalOutput.append(output);
+                    // Request was not successful
+                    if (response.getStatusLine().getStatusCode() != 200) {
+                        throw new RuntimeException("Failed : HTTP error code : "
+                                + response.getStatusLine().getStatusCode());
                     }
-                    System.out.println(totalOutput.toString());
-                }
 
-                br.close();
+                    // Debug
+                    if (Main.DEBUG) {
+                        try {
+
+                            // Setup reader
+                            BufferedReader br = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
+                            StringBuilder totalOutput = new StringBuilder();
+                            String output = null;
+
+                            // Print output
+                            System.out.println("Output from Server .... \n");
+                            while ((output = br.readLine()) != null) {
+                                totalOutput.append(output);
+                            }
+                            System.out.println(totalOutput.toString());
+
+                            // Close reader
+                            br.close();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                } catch(IOException e) {
+                    System.out.println("Could not make the POST request!");
+                    e.printStackTrace();
+                }
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
-            if(postRequest != null)
-                postRequest.releaseConnection();
+
+            // Release
+            postRequest.releaseConnection();
+
         }
     }
 }
