@@ -4,14 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Random;
 
 /**
  * Created by Ruben on 28-5-2015.
  */
-public class CreateObject {
+public class Garage {
     private Random r = new Random();
     private int maxSpots;
     private int lastFreeSpotsInt;
@@ -19,7 +17,7 @@ public class CreateObject {
     private float lat;
     private float lng;
 
-    public CreateObject(String name, int maxSpots, float lat, float lng) {
+    public Garage(String name, int maxSpots, float lat, float lng) {
         this.name = name;
         this.maxSpots = maxSpots;
         this.lat = lat;
