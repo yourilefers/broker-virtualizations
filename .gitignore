@@ -1,5 +1,5 @@
 *.class
-Iconr
+*Iconr*
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -14,7 +14,7 @@ hs_err_pid*
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
 
-*.iml
+#*.iml
 
 ## Directory-based project format:
 # .idea/
