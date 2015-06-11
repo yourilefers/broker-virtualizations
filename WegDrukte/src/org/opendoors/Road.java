@@ -86,7 +86,7 @@ public class Road {
 
             // Add the location
             attributes.put(new JSONObject()
-                    .put("name", "location")
+                    .put("name", "locations")
                     .put("type", "array")
                     .put("value", jsonArrayLocations));
 
