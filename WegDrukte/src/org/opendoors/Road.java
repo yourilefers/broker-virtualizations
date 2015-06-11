@@ -37,7 +37,7 @@ public class Road {
 
             // Main item
             JSONObject item = new JSONObject()
-                .put("type", "trafficDensity")
+                .put("type", "trafficdensity")
                 .put("isPattern", "false")
                 .put("id", name.replaceAll(" ", "_").toLowerCase());
 
