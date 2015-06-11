@@ -37,7 +37,7 @@ public class Road {
 
             // Main item
             JSONObject item = new JSONObject()
-                .put("type", "trafficDensity")
+                .put("type", "trafficdensity")
                 .put("isPattern", "false")
                 .put("id", name.replaceAll(" ", "_").toLowerCase());
 
@@ -86,7 +86,7 @@ public class Road {
 
             // Add the location
             attributes.put(new JSONObject()
-                    .put("name", "location")
+                    .put("name", "locations")
                     .put("type", "array")
                     .put("value", jsonArrayLocations));
 
