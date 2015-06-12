@@ -43,7 +43,7 @@ public class Building {
 
             // The name
             attributes.put(new JSONObject()
-                    .put("name", "originalName")
+                    .put("name", "original_name")
                     .put("type", "String")
                     .put("value", name));
 
@@ -55,7 +55,7 @@ public class Building {
 
             // Timestamp
             attributes.put(new JSONObject()
-                    .put("name", "lastUpdate")
+                    .put("name", "last_update")
                     .put("type", "unix timestamp")
                     .put("value", System.currentTimeMillis()));
 

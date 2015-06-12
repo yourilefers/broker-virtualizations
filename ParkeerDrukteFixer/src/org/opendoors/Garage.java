@@ -42,23 +42,23 @@ public class Garage {
 
             JSONArray attributes = new JSONArray();
             JSONObject attrItem = new JSONObject();
-            attrItem.put("name", "originalName");
+            attrItem.put("name", "original_name");
             attrItem.put("type", "String");
             attrItem.put("value", name);
 
 
             JSONObject attrItem2 = new JSONObject();
-            attrItem2.put("name", "maxSpots");
+            attrItem2.put("name", "max_spots");
             attrItem2.put("type", "int");
             attrItem2.put("value", maxSpots);
 
             JSONObject attrItem3 = new JSONObject();
-            attrItem3.put("name", "freeSpots");
+            attrItem3.put("name", "free_spots");
             attrItem3.put("type", "int");
             attrItem3.put("value", getFreeSpots());
 
             JSONObject attrItem4 = new JSONObject();
-            attrItem4.put("name", "lastUpdate");
+            attrItem4.put("name", "last_update");
             attrItem4.put("type", "unix timestamp");
             attrItem4.put("value", System.currentTimeMillis());
 
