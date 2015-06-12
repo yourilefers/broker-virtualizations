@@ -46,25 +46,25 @@ public class Road {
 
             // The name
             attributes.put(new JSONObject()
-                    .put("name", "originalName")
+                    .put("name", "original_name")
                     .put("type", "String")
                     .put("value", name));
 
             // Max speed
             attributes.put(new JSONObject()
-                    .put("name", "maxSpeed")
+                    .put("name", "max_speed")
                     .put("type", "int")
                     .put("value", maxSpeed));
 
             // Current speed
             attributes.put(new JSONObject()
-                    .put("name", "currentSpeed")
+                    .put("name", "current_speed")
                     .put("type", "int")
                     .put("value", getCurrentSpeed()));
 
             //  Timestamp
             attributes.put(new JSONObject()
-                    .put("name", "lastUpdate")
+                    .put("name", "last_update")
                     .put("type", "unix timestamp")
                     .put("value", System.currentTimeMillis()));
 
