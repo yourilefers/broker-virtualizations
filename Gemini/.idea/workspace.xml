@@ -67,10 +67,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30580762">
+            <state vertical-scroll-proportion="0.0">
               <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -105,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ckan.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Ckan.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="299" column="85" selection-start-line="299" selection-start-column="85" selection-end-line="299" selection-end-column="85" />
+            <state vertical-scroll-proportion="0.5707804">
+              <caret line="262" column="32" selection-start-line="262" selection-start-column="32" selection-end-line="262" selection-end-column="32" />
               <folding>
                 <element signature="docComment;class#Ckan#0" expanded="false" />
                 <element signature="docComment;method#setup#0;class#Ckan#0" expanded="false" />
@@ -119,10 +119,19 @@
                 <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
                 <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
                 <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
-                <element signature="method#createDatastore#0;class#Ckan#0" expanded="false" />
                 <element signature="docComment;method#insertData#0;class#Ckan#0" expanded="false" />
                 <element signature="method#insertData#0;class#Ckan#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Logger.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/common/Logger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -172,16 +181,16 @@
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/common/System.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/common/Common.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/common/Config.java" />
-        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/common/Logger.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/common/Constants.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/network/NetworkHelper.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/network/Ckan.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/network/Orion.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/interfaces/Sink.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/Gemini.java" />
-        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/server/Server.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/server/Client.java" />
+        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/common/Logger.java" />
+        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java" />
       </list>
     </option>
   </component>
@@ -283,78 +292,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="org.opendoors.gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org.opendoors.gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sinks" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org.opendoors.gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org.opendoors.gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="network" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org.opendoors.gemini" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="interfaces" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -714,12 +651,12 @@
       <updated>1433931595709</updated>
       <workItem from="1433931601927" duration="11467000" />
       <workItem from="1434010012303" duration="16274000" />
-      <workItem from="1434094113397" duration="1247000" />
+      <workItem from="1434094113397" duration="3207000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28988000" />
+    <option name="totallyTimeSpent" value="30948000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
@@ -738,7 +675,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920355" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -771,7 +708,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -862,7 +799,6 @@
             <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
             <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
             <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
-            <element signature="method#createDatastore#0;class#Ckan#0" expanded="false" />
             <element signature="docComment;method#insertData#0;class#Ckan#0" expanded="false" />
             <element signature="method#insertData#0;class#Ckan#0" expanded="false" />
           </folding>
@@ -958,7 +894,6 @@
             <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
             <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
             <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
-            <element signature="method#createDatastore#0;class#Ckan#0" expanded="false" />
             <element signature="docComment;method#insertData#0;class#Ckan#0" expanded="false" />
             <element signature="method#insertData#0;class#Ckan#0" expanded="false" />
           </folding>
@@ -970,7 +905,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1007,13 +942,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51232874">
           <caret line="45" column="62" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/common/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="43" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;class#Config#0" expanded="false" />
+            <element signature="docComment;method#Config#0;class#Config#0" expanded="false" />
+            <element signature="docComment;method#getInstance#0;class#Config#0" expanded="false" />
+            <element signature="method#Config#0;class#Config#0" expanded="false" />
+            <element signature="docComment;method#isInitialized#0;class#Config#0" expanded="false" />
+            <element signature="docComment;method#toString#0;class#Config#0" expanded="false" />
+            <element signature="method#toString#0;class#Config#0" expanded="false" />
+            <element signature="docComment;method#parseConfigLine#0;class#Config#0" expanded="false" />
+            <element signature="method#Config#0;class#Config#0" expanded="false" />
+            <element signature="docComment;method#get#0;class#Config#0" expanded="false" />
+            <element signature="docComment;method#get#1;class#Config#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1021,6 +963,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1029,27 +972,7 @@
         <state vertical-scroll-proportion="0.34029037">
           <caret line="25" column="48" selection-start-line="25" selection-start-column="48" selection-end-line="27" selection-end-column="62" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="299" column="85" selection-start-line="299" selection-start-column="85" selection-end-line="299" selection-end-column="85" />
-          <folding>
-            <element signature="docComment;class#Ckan#0" expanded="false" />
-            <element signature="docComment;method#setup#0;class#Ckan#0" expanded="false" />
-            <element signature="method#setup#0;class#Ckan#0" expanded="false" />
-            <element signature="docComment;method#publish#0;class#Ckan#0" expanded="false" />
-            <element signature="method#publish#0;class#Ckan#0" expanded="false" />
-            <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
-            <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
-            <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
-            <element signature="method#createDatastore#0;class#Ckan#0" expanded="false" />
-            <element signature="docComment;method#insertData#0;class#Ckan#0" expanded="false" />
-            <element signature="method#insertData#0;class#Ckan#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1132,7 +1055,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30580762">
+        <state vertical-scroll-proportion="0.0">
           <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1140,6 +1063,33 @@
             <element signature="method#Client#0;class#Client#0" expanded="false" />
             <element signature="docComment;method#run#0;class#Client#0" expanded="false" />
             <element signature="method#parseRequest#0;class#Client#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/common/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5707804">
+          <caret line="262" column="32" selection-start-line="262" selection-start-column="32" selection-end-line="262" selection-end-column="32" />
+          <folding>
+            <element signature="docComment;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#setup#0;class#Ckan#0" expanded="false" />
+            <element signature="method#setup#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#publish#0;class#Ckan#0" expanded="false" />
+            <element signature="method#publish#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
+            <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#insertData#0;class#Ckan#0" expanded="false" />
+            <element signature="method#insertData#0;class#Ckan#0" expanded="false" />
           </folding>
         </state>
       </provider>

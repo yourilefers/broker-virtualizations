@@ -1,5 +1,7 @@
 package org.opendoors.gemini.common;
 
+import java.io.*;
+
 /**
  * Contributors:
  * yourilefers
@@ -22,8 +24,10 @@ public class Logger {
      * @param message
      */
     public static void info(String message) {
+        String temp = prefix() + " [INFO] | " + message;
+        writeToLog(temp);
         if(!Config.isInitialized() || !Config.getInstance().get("debug", "info").equals("error")) {
-            System.out.println(prefix() + " [INFO] | " + message);
+            System.out.println(temp);
         }
     }
 
@@ -42,7 +46,9 @@ public class Logger {
      * @param message
      */
     public static void error(String message, Boolean exit) {
-        System.err.println(prefix() + " [ERROR] | " + message);
+        String temp = prefix() + " [ERROR] | " + message;
+        writeToLog(temp);
+        System.err.println(temp);
         if(exit) System.exit(1);
     }
 
@@ -52,8 +58,35 @@ public class Logger {
      * @param message
      */
     public static void debug(String message) {
+        String temp = prefix() + " [DEBUG] | " + message;
+        writeToLog(temp);
         if(!Config.isInitialized() || Config.getInstance().get("debug", "info").equals("debug")) {
-            System.out.println(prefix() + " [DEBUG] | " + message);
+            System.out.println(temp);
+        }
+    }
+
+    /**
+     * Write to the log file.
+     * @param message
+     */
+    private static void writeToLog(String message) {
+        try {
+
+            // Open the file
+            File file = new File(Config.getInstance().get("log_file", "gemini.log"));
+
+            // If the file does not exist, create it
+            if(!file.exists()){
+                file.createNewFile();
+            }
+
+            // Write the file
+            BufferedWriter out = new BufferedWriter(new FileWriter(file.getName(), true));
+            out.write(message + "\n");
+            out.close();
+
+        } catch(IOException e) {
+            System.out.println("Could not write to log file: " + e.getLocalizedMessage());
         }
     }
 

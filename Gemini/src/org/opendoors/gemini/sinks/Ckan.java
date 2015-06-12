@@ -255,10 +255,12 @@ public class Ckan implements Sink {
                 String type = attribute.optString("type");
                 if (type.equals("int") || type.equals("float")) {
                     obj.put("type", type);
-                } else if (type.equals("String") || type.equals("string") || type.equals("unix timestamp")) {
+                } else if (type.equals("String") || type.equals("string")) {
                     obj.put("type", "text");
                 } else if (type.equals("array")) {
                     obj.put("type", "json");
+                } else if(type.equals("unix timestamp")) {
+                    obj.put("type", "bigint");
                 }
 
                 // Add fields/records
@@ -320,10 +322,12 @@ public class Ckan implements Sink {
                 String type = attribute.optString("type");
                 if (type.equals("int") || type.equals("float")) {
                     obj.put(attribute.optString("name"), Integer.parseInt(attribute.optString("value")));
-                } else if (type.equals("String") || type.equals("string") || type.equals("unix timestamp")) {
+                } else if (type.equals("String") || type.equals("string")) {
                     obj.put(attribute.optString("name"), attribute.optString("value"));
                 } else if (type.equals("array")) {
                     obj.put(attribute.optString("name"), attribute.optJSONArray("value").toString());
+                } else if(type.equals("unix timestamp")) {
+                    obj.put(attribute.optString("name"), attribute.optLong("value"));
                 }
 
             }
