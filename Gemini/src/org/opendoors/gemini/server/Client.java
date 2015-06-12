@@ -60,7 +60,7 @@ public class Client extends Thread {
             String answer = "";
 
             // Wait for incoming messages
-            while (true) {
+            while(true) {
 
                 // Wait for input
                 String input = in.readLine();
@@ -77,6 +77,8 @@ public class Client extends Thread {
                     parseRequest(answer);
                     answer = "";
 
+                } else {
+                    throw new Exception("STOP SESSION");
                 }
 
             }
@@ -99,6 +101,9 @@ public class Client extends Thread {
                 Logger.error("SERVER : CLIENT : Could not close the connections: " + e.getLocalizedMessage());
 
             }
+
+            // Remove client
+            Gemini.getInstance().getServer().removeClient(this);
 
             // Final
             Logger.debug("SERVER : CLIENT : Connection closed with client.");

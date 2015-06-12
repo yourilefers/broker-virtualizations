@@ -229,7 +229,6 @@ public class Ckan implements Sink {
         // Create the list of fields
         JSONArray attributes = object.optJSONArray("attributes");
         JSONArray fields = new JSONArray();
-        fields.put(new JSONObject().put("id", "id").put("type", "bigint"));
         fields.put(new JSONObject().put("id", "name").put("type", "text"));
         for(int i = 0; i < attributes.length(); i++) {
 
@@ -304,7 +303,6 @@ public class Ckan implements Sink {
         JSONArray attributes = object.optJSONArray("attributes");
         JSONArray records = new JSONArray();
         JSONObject obj = new JSONObject();
-        obj.put("id", System.nanoTime());
         obj.put("name", object.optString("id"));
         for(int i = 0; i < attributes.length(); i++) {
             JSONObject attribute = attributes.optJSONObject(i);

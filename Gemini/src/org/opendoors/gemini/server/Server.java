@@ -65,6 +65,11 @@ public class Server extends Thread {
 
             } finally {
 
+                // Close all existing clients
+                for(int i = 0; i < clients.size(); i++) {
+                    clients.get(i).interrupt();
+                }
+
                 // Close socket
                 serverSocket.close();
 
@@ -78,6 +83,14 @@ public class Server extends Thread {
 
         }
 
+    }
+
+    /**
+     * Remove a client from the list of clients.
+     * @param client
+     */
+    public void removeClient(Client client) {
+        clients.remove(client);
     }
 
 }

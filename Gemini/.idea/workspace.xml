@@ -28,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Gemini.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Gemini.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/Gemini.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51724136">
-              <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding>
                 <element signature="docComment;method#main#0;class#Gemini#0" expanded="false" />
                 <element signature="method#main#0;class#Gemini#0" expanded="false" />
@@ -56,27 +56,28 @@
         <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Server.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <caret line="87" column="4" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="4" />
               <folding>
                 <element signature="docComment;class#Server#0" expanded="false" />
                 <element signature="docComment;method#run#0;class#Server#0" expanded="false" />
                 <element signature="method#run#0;class#Server#0" expanded="false" />
+                <element signature="docComment;method#removeClient#0;class#Server#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="122" column="28" selection-start-line="122" selection-start-column="28" selection-end-line="122" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.30580762">
+              <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#Client#0;class#Client#0" expanded="false" />
                 <element signature="method#Client#0;class#Client#0" expanded="false" />
                 <element signature="docComment;method#run#0;class#Client#0" expanded="false" />
-                <element signature="docComment;method#parseRequest#0;class#Client#0" expanded="false" />
+                <element signature="method#parseRequest#0;class#Client#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -108,16 +109,19 @@
         <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+              <caret line="299" column="85" selection-start-line="299" selection-start-column="85" selection-end-line="299" selection-end-column="85" />
               <folding>
                 <element signature="docComment;class#Ckan#0" expanded="false" />
                 <element signature="docComment;method#setup#0;class#Ckan#0" expanded="false" />
+                <element signature="method#setup#0;class#Ckan#0" expanded="false" />
                 <element signature="docComment;method#publish#0;class#Ckan#0" expanded="false" />
                 <element signature="method#publish#0;class#Ckan#0" expanded="false" />
                 <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
                 <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
                 <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
                 <element signature="method#createDatastore#0;class#Ckan#0" expanded="false" />
+                <element signature="docComment;method#insertData#0;class#Ckan#0" expanded="false" />
+                <element signature="method#insertData#0;class#Ckan#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -127,7 +131,7 @@
         <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/network/NetworkHelper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
               <folding>
                 <element signature="docComment;method#NetworkHelper#0;class#NetworkHelper#0" expanded="false" />
                 <element signature="method#NetworkHelper#0;class#NetworkHelper#0" expanded="false" />
@@ -172,12 +176,12 @@
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/common/Constants.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/network/NetworkHelper.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/network/Ckan.java" />
-        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/server/Server.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/network/Orion.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/interfaces/Sink.java" />
-        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/server/Client.java" />
-        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java" />
         <option value="$PROJECT_DIR$/src/org/opendoors/gemini/Gemini.java" />
+        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java" />
+        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/server/Server.java" />
+        <option value="$PROJECT_DIR$/src/org/opendoors/gemini/server/Client.java" />
       </list>
     </option>
   </component>
@@ -256,8 +260,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -376,6 +378,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -709,26 +713,27 @@
       <option name="number" value="Default" />
       <updated>1433931595709</updated>
       <workItem from="1433931601927" duration="11467000" />
-      <workItem from="1434010012303" duration="16105000" />
+      <workItem from="1434010012303" duration="16274000" />
+      <workItem from="1434094113397" duration="1247000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27572000" />
+    <option name="totallyTimeSpent" value="28988000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920355" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286219" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -740,13 +745,21 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24973376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37168142" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -758,7 +771,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -767,6 +780,116 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/Gemini.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;method#main#0;class#Gemini#0" expanded="false" />
+            <element signature="method#main#0;class#Gemini#0" expanded="false" />
+            <element signature="docComment;method#Gemini#0;class#Gemini#0" expanded="false" />
+            <element signature="method#Gemini#0;class#Gemini#0" expanded="false" />
+            <element signature="docComment;method#getInstance#0;class#Gemini#0" expanded="false" />
+            <element signature="method#getInstance#0;class#Gemini#0" expanded="false" />
+            <element signature="docComment;method#setup#0;class#Gemini#0" expanded="false" />
+            <element signature="method#setup#0;class#Gemini#0" expanded="false" />
+            <element signature="docComment;method#startServer#0;class#Gemini#0" expanded="false" />
+            <element signature="method#startServer#0;class#Gemini#0" expanded="false" />
+            <element signature="docComment;method#getCkan#0;class#Gemini#0" expanded="false" />
+            <element signature="docComment;method#getOrion#0;class#Gemini#0" expanded="false" />
+            <element signature="docComment;method#getServer#0;class#Gemini#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#Server#0" expanded="false" />
+            <element signature="docComment;method#run#0;class#Server#0" expanded="false" />
+            <element signature="method#run#0;class#Server#0" expanded="false" />
+            <element signature="docComment;method#removeClient#0;class#Server#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="122" column="28" selection-start-line="122" selection-start-column="28" selection-end-line="122" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#Client#0;class#Client#0" expanded="false" />
+            <element signature="method#Client#0;class#Client#0" expanded="false" />
+            <element signature="docComment;method#run#0;class#Client#0" expanded="false" />
+            <element signature="method#parseRequest#0;class#Client#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/network/Orion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="163" column="4" selection-start-line="163" selection-start-column="4" selection-end-line="163" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Orion#0" expanded="false" />
+            <element signature="docComment;method#Orion#0;class#Orion#0" expanded="false" />
+            <element signature="method#Orion#0;class#Orion#0" expanded="false" />
+            <element signature="docComment;method#indexTypes#0;class#Orion#0" expanded="false" />
+            <element signature="method#indexTypes#0;class#Orion#0" expanded="false" />
+            <element signature="docComment;method#subscribe#0;class#Orion#0" expanded="false" />
+            <element signature="method#subscribe#0;class#Orion#0" expanded="false" />
+            <element signature="docComment;method#unsubscribe#0;class#Orion#0" expanded="false" />
+            <element signature="method#unsubscribe#0;class#Orion#0" expanded="false" />
+            <element signature="docComment;method#getSubscriptionId#0;class#Orion#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#setup#0;class#Ckan#0" expanded="false" />
+            <element signature="method#setup#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#publish#0;class#Ckan#0" expanded="false" />
+            <element signature="method#publish#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
+            <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
+            <element signature="method#createDatastore#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#insertData#0;class#Ckan#0" expanded="false" />
+            <element signature="method#insertData#0;class#Ckan#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/network/NetworkHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;method#NetworkHelper#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#NetworkHelper#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#setPost#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#setPost#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#setHeader#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#setHeader#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#setPostData#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#setPostData#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#statusCode#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#statusCode#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#response#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#response#0;class#NetworkHelper#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/Gemini.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -797,6 +920,7 @@
             <element signature="docComment;class#Server#0" expanded="false" />
             <element signature="docComment;method#run#0;class#Server#0" expanded="false" />
             <element signature="method#run#0;class#Server#0" expanded="false" />
+            <element signature="docComment;method#removeClient#0;class#Server#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -828,12 +952,15 @@
           <folding>
             <element signature="docComment;class#Ckan#0" expanded="false" />
             <element signature="docComment;method#setup#0;class#Ckan#0" expanded="false" />
+            <element signature="method#setup#0;class#Ckan#0" expanded="false" />
             <element signature="docComment;method#publish#0;class#Ckan#0" expanded="false" />
             <element signature="method#publish#0;class#Ckan#0" expanded="false" />
             <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
             <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
             <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
             <element signature="method#createDatastore#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#insertData#0;class#Ckan#0" expanded="false" />
+            <element signature="method#insertData#0;class#Ckan#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -873,10 +1000,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#getOSType#0;class#Common#0" expanded="false" />
-            <element signature="method#getOSType#0;class#Common#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -884,20 +1007,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51232874">
           <caret line="45" column="62" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#Config#0" expanded="false" />
-            <element signature="docComment;method#Config#0;class#Config#0" expanded="false" />
-            <element signature="docComment;method#getInstance#0;class#Config#0" expanded="false" />
-            <element signature="method#Config#0;class#Config#0" expanded="false" />
-            <element signature="docComment;method#isInitialized#0;class#Config#0" expanded="false" />
-            <element signature="docComment;method#toString#0;class#Config#0" expanded="false" />
-            <element signature="method#toString#0;class#Config#0" expanded="false" />
-            <element signature="docComment;method#parseConfigLine#0;class#Config#0" expanded="false" />
-            <element signature="method#Config#0;class#Config#0" expanded="false" />
-            <element signature="docComment;method#get#0;class#Config#0" expanded="false" />
-            <element signature="docComment;method#get#1;class#Config#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -905,7 +1014,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="43" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -913,7 +1021,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -927,37 +1034,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Client.java">
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="122" column="28" selection-start-line="122" selection-start-column="28" selection-end-line="122" selection-end-column="28" />
+          <caret line="299" column="85" selection-start-line="299" selection-start-column="85" selection-end-line="299" selection-end-column="85" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#Client#0;class#Client#0" expanded="false" />
-            <element signature="method#Client#0;class#Client#0" expanded="false" />
-            <element signature="docComment;method#run#0;class#Client#0" expanded="false" />
-            <element signature="docComment;method#parseRequest#0;class#Client#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/network/NetworkHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#NetworkHelper#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="method#NetworkHelper#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="docComment;method#setPost#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="method#setPost#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="docComment;method#setHeader#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="method#setHeader#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="docComment;method#setPostData#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="method#setPostData#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="docComment;method#statusCode#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="method#statusCode#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="docComment;method#response#0;class#NetworkHelper#0" expanded="false" />
-            <element signature="method#response#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#setup#0;class#Ckan#0" expanded="false" />
+            <element signature="method#setup#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#publish#0;class#Ckan#0" expanded="false" />
+            <element signature="method#publish#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
+            <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
+            <element signature="method#createDatastore#0;class#Ckan#0" expanded="false" />
+            <element signature="docComment;method#insertData#0;class#Ckan#0" expanded="false" />
+            <element signature="method#insertData#0;class#Ckan#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -982,39 +1074,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/sinks/Ckan.java">
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/network/NetworkHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding>
-            <element signature="docComment;class#Ckan#0" expanded="false" />
-            <element signature="docComment;method#setup#0;class#Ckan#0" expanded="false" />
-            <element signature="docComment;method#publish#0;class#Ckan#0" expanded="false" />
-            <element signature="method#publish#0;class#Ckan#0" expanded="false" />
-            <element signature="docComment;method#createPackage#0;class#Ckan#0" expanded="false" />
-            <element signature="method#createPackage#0;class#Ckan#0" expanded="false" />
-            <element signature="docComment;method#createDatastore#0;class#Ckan#0" expanded="false" />
-            <element signature="method#createDatastore#0;class#Ckan#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#Server#0" expanded="false" />
-            <element signature="docComment;method#run#0;class#Server#0" expanded="false" />
-            <element signature="method#run#0;class#Server#0" expanded="false" />
+            <element signature="docComment;method#NetworkHelper#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#NetworkHelper#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#setPost#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#setPost#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#setHeader#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#setHeader#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#setPostData#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#setPostData#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#statusCode#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#statusCode#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="docComment;method#response#0;class#NetworkHelper#0" expanded="false" />
+            <element signature="method#response#0;class#NetworkHelper#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/Gemini.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51724136">
-          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="docComment;method#main#0;class#Gemini#0" expanded="false" />
             <element signature="method#main#0;class#Gemini#0" expanded="false" />
@@ -1029,6 +1113,33 @@
             <element signature="docComment;method#getCkan#0;class#Gemini#0" expanded="false" />
             <element signature="docComment;method#getOrion#0;class#Gemini#0" expanded="false" />
             <element signature="docComment;method#getServer#0;class#Gemini#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="87" column="4" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="4" />
+          <folding>
+            <element signature="docComment;class#Server#0" expanded="false" />
+            <element signature="docComment;method#run#0;class#Server#0" expanded="false" />
+            <element signature="method#run#0;class#Server#0" expanded="false" />
+            <element signature="docComment;method#removeClient#0;class#Server#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/opendoors/gemini/server/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30580762">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#Client#0;class#Client#0" expanded="false" />
+            <element signature="method#Client#0;class#Client#0" expanded="false" />
+            <element signature="docComment;method#run#0;class#Client#0" expanded="false" />
+            <element signature="method#parseRequest#0;class#Client#0" expanded="false" />
           </folding>
         </state>
       </provider>
