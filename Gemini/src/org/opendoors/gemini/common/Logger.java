@@ -26,7 +26,7 @@ public class Logger {
     public static void info(String message) {
         String temp = prefix() + " [INFO] | " + message;
         writeToLog(temp);
-        if(!Config.isInitialized() || !Config.getInstance().get("debug", "info").equals("error")) {
+        if(!Config.isInitialized() || !Config.getInstance().get(Constants.CONFIG_DEBUG, Constants.CONFIG_DEBUG_DEFAULT).equals("error")) {
             System.out.println(temp);
         }
     }
@@ -60,7 +60,7 @@ public class Logger {
     public static void debug(String message) {
         String temp = prefix() + " [DEBUG] | " + message;
         writeToLog(temp);
-        if(!Config.isInitialized() || Config.getInstance().get("debug", "info").equals("debug")) {
+        if(!Config.isInitialized() || Config.getInstance().get(Constants.CONFIG_DEBUG, Constants.CONFIG_DEBUG_DEFAULT).equals("debug")) {
             System.out.println(temp);
         }
     }
@@ -73,7 +73,7 @@ public class Logger {
         try {
 
             // Open the file
-            File file = new File(Config.getInstance().get("log_file", "gemini.log"));
+            File file = new File(Config.getInstance().get(Constants.CONFIG_LOG_LOCATION, Constants.CONFIG_LOG_LOCATION_DEFAULT));
 
             // If the file does not exist, create it
             if(!file.exists()){

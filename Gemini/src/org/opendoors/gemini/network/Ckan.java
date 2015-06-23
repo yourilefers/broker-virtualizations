@@ -1,10 +1,10 @@
-package org.opendoors.gemini.sinks;
+package org.opendoors.gemini.network;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.opendoors.gemini.common.Config;
+import org.opendoors.gemini.common.Constants;
 import org.opendoors.gemini.common.Logger;
-import org.opendoors.gemini.interfaces.Sink;
-import org.opendoors.gemini.network.NetworkHelper;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -16,7 +16,10 @@ import java.util.HashMap;
  *
  * @since v1.0
  */
-public class Ckan implements Sink {
+public class Ckan {
+
+    /** The config */
+    private Config config;
 
     /** The organization of this user */
     private String organization;
@@ -27,6 +30,12 @@ public class Ckan implements Sink {
     /** The list of known packages */
     private HashMap<String, String> packages;
 
+    /** The sink URL */
+    private String url;
+
+    //
+    // SETUP
+
     /**
      * Setup CKAN.
      *
@@ -34,14 +43,36 @@ public class Ckan implements Sink {
      */
     public void setup() throws Exception {
 
+        // Setup config
+        config = Config.getInstance();
+
+        // Set url
+        url = config.get(Constants.CONFIG_CKAN_URL, "");
+
         // Setup orion
         if(url.isEmpty()) {
             throw new Exception("The url of the CKAN server has not been defined in config.conf. Please add 'ckan_url' to your config.");
         }
 
         // Try to connect
-        String connectResult = new NetworkHelper(url + "/api/util/status")
-                .response();
+        connect();
+
+        // Find the organization
+        setupOrganization();
+
+        // Setup packages
+        setupPackages();
+
+    }
+
+    /**
+     * Try to connect to CKAN
+     * @throws Exception
+     */
+    private void connect() throws Exception {
+
+        // Try to connect
+        String connectResult = new NetworkHelper(url + "/api/util/status").response();
         Logger.debug("CKAN connect test result: " + connectResult);
         if(connectResult.isEmpty()) {
             throw new IOException("Ckan did not respond correctly!");
@@ -51,29 +82,35 @@ public class Ckan implements Sink {
         JSONObject jsonObject = new JSONObject(connectResult);
         Logger.info("Found CKAN version " + jsonObject.optString("ckan_version"));
 
-        // Find the organization
-        if(config.get("ckan_organization", "").isEmpty()) {
+    }
+
+    /**
+     * Setup the organization section of CKAN
+     * @throws Exception
+     */
+    private void setupOrganization() throws Exception {
+
+        if(config.get(Constants.CONFIG_CKAN_ORGANIZATION, "").isEmpty()) {
             throw new Exception("No organization defined in the config file. Please add 'ckan_organization' to your config.");
         } else {
-            organization = config.get("ckan_organization");
+            organization = config.get(Constants.CONFIG_CKAN_ORGANIZATION);
         }
 
         // Find the organization
-        if(config.get("ckan_api_key", "").isEmpty()) {
+        if(config.get(Constants.CONFIG_CKAN_API_KEY, "").isEmpty()) {
             throw new Exception("No API key defined in the config file. Please add 'ckan_api_key' to your config.");
         } else {
-            apiKey = config.get("ckan_api_key");
+            apiKey = config.get(Constants.CONFIG_CKAN_API_KEY);
         }
 
         // Try to connect
-        String organizations = new NetworkHelper(url + "/api/3/action/organization_list")
-                .response();
+        String organizations = new NetworkHelper(url + "/api/3/action/organization_list").response();
         if(organizations.isEmpty()) {
-            throw new IOException("Ckan did not return the list of organizations!");
+            throw new IOException("Ckan did not return the list of organizations.");
         }
 
         // Make a JSON object of it and retrieve the version
-        jsonObject = new JSONObject(organizations);
+        JSONObject jsonObject = new JSONObject(organizations);
         JSONArray jsonOrgs = jsonObject.getJSONArray("result");
 
         // Does the org exist?
@@ -99,7 +136,16 @@ public class Ckan implements Sink {
 
         }
 
-        // Setup packages
+    }
+
+    /**
+     * Setup packages from the CKAN API.
+     *
+     * @throws Exception
+     */
+    private void setupPackages() throws Exception {
+
+        // Create the packages hashmap
         packages = new HashMap<>();
 
         // Try to connect
@@ -110,7 +156,7 @@ public class Ckan implements Sink {
         }
 
         // Make a JSON object of it and retrieve the version
-        jsonObject = new JSONObject(packagesList);
+        JSONObject jsonObject = new JSONObject(packagesList);
         JSONArray jsonPackagesList = jsonObject.getJSONArray("result");
         for(int i = 0; i < jsonPackagesList.length(); i++) {
 
@@ -131,6 +177,10 @@ public class Ckan implements Sink {
         Logger.debug("CKAN packages: " + Arrays.toString(packages.keySet().toArray()));
 
     }
+
+    //
+    // Publishing
+    //
 
     /**
      * Publish a new result to Ckan.
@@ -194,24 +244,24 @@ public class Ckan implements Sink {
     private void createPackage(JSONObject object) throws IOException {
 
         // Add the name
-        JSONObject data = new JSONObject();
-        data.put("name", object.optString("type").toLowerCase());
+        JSONObject dataToPost = new JSONObject();
+        dataToPost.put("name", object.optString("type").toLowerCase());
 
-        Logger.debug("CKAN : CREATE PACKAGE : Data to insert: \n" + data.toString(4));
+        Logger.debug("CKAN : CREATE PACKAGE : Data to insert: \n" + dataToPost.toString(4));
 
         // Create the organization
-        String orgs = new NetworkHelper(url + "/api/3/action/package_create")
+        String createdPackageAnswer = new NetworkHelper(url + "/api/3/action/package_create")
                 .setPost()
                 .setHeader("Authorization", apiKey)
-                .setPostData(data.toString(4))
+                .setPostData(dataToPost.toString(4))
                 .response();
 
         Logger.info("CKAN : CREATE PACKAGE : Package created");
-        Logger.debug("CKAN : CREATE PACKAGE : Inserted data: \n" + orgs);
+        Logger.debug("CKAN : CREATE PACKAGE : Inserted data: \n" + createdPackageAnswer);
 
         // Add the JSON object
-        JSONObject jsonObject = new JSONObject(orgs).optJSONObject("result");
-        packages.put(object.optString("type"), jsonObject.optString("id"));
+        JSONObject result = new JSONObject(createdPackageAnswer).optJSONObject("result");
+        packages.put(object.optString("type"), result.optString("id"));
 
     }
 
@@ -227,40 +277,58 @@ public class Ckan implements Sink {
         Logger.debug("CKAN : CREATE DATA STORE : Object to insert: \n" + object.toString(4));
 
         // Create the list of fields
-        JSONArray attributes = object.optJSONArray("attributes");
         JSONArray fields = new JSONArray();
+
+        // Add the name field for identification
         fields.put(new JSONObject().put("id", "name").put("type", "text"));
+
+        // The list of attributes to go through
+        JSONArray attributes = object.optJSONArray("attributes");
         for(int i = 0; i < attributes.length(); i++) {
 
-            // Some objects
+            // The current attribute
             JSONObject attribute = attributes.optJSONObject(i);
 
-            // Location?
+            // The object to add
+            JSONObject obj = new JSONObject();
+
+            // In case the attribute defines a location
             if(attribute.optString("name").equals("location")) {
-                JSONArray temp = attribute.optJSONArray("value");
-                for(int j = 0; j < temp.length(); j++) {
-                    JSONObject obj = new JSONObject();
-                    JSONObject tem = temp.getJSONObject(j);
-                    obj.put("id", tem.optString("name"));
+
+                // The location attribute
+                JSONArray locationArray = attribute.optJSONArray("value");
+                for(int j = 0; j < locationArray.length(); j++) {
+
+                    // The object to add
+                    obj = new JSONObject();
+
+                    // Retrieve the current location type and add it
+                    JSONObject locationType = locationArray.getJSONObject(j);
+                    obj.put("id", locationType.optString("name"));
                     obj.put("type", "float");
                     fields.put(obj);
+
                 }
             } else {
 
                 // The JSON object to insert
-                JSONObject obj = new JSONObject();
                 obj.put("id", attribute.optString("name"));
 
                 // Get and set type
-                String type = attribute.optString("type");
-                if (type.equals("int") || type.equals("float")) {
-                    obj.put("type", type);
-                } else if (type.equals("String") || type.equals("string")) {
-                    obj.put("type", "text");
-                } else if (type.equals("array")) {
-                    obj.put("type", "json");
-                } else if(type.equals("unix timestamp")) {
-                    obj.put("type", "bigint");
+                switch(attribute.optString("type")) {
+                    case "String":
+                    case "string":
+                        obj.put("type", "text");
+                        break;
+                    case "array":
+                        obj.put("type", "json");
+                        break;
+                    case "unix timestamp":
+                        obj.put("type", "bigint");
+                        break;
+                    default:
+                        obj.put("type", attribute.optString("type"));
+                        break;
                 }
 
                 // Add fields/records
@@ -270,25 +338,25 @@ public class Ckan implements Sink {
         }
 
         // Add the name
-        JSONObject data = new JSONObject();
-        data.put("fields", fields);
-        data.put("resource", new JSONObject().put("package_id", packageId));
+        JSONObject dataToPost = new JSONObject();
+        dataToPost.put("fields", fields);
+        dataToPost.put("resource", new JSONObject().put("package_id", packageId));
 
-        Logger.debug("CKAN : CREATE DATA STORE : Data to insert: \n" + data.toString(4));
+        Logger.debug("CKAN : CREATE DATA STORE : Data to insert: \n" + dataToPost.toString(4));
 
         // Create the organization
-        String orgs = new NetworkHelper(url + "/api/3/action/datastore_create")
+        String dataStoreAnswer = new NetworkHelper(url + "/api/3/action/datastore_create")
                 .setPost()
                 .setHeader("Authorization", apiKey)
-                .setPostData(data.toString(4))
+                .setPostData(dataToPost.toString(4))
                 .response();
 
         Logger.info("CKAN : CREATE DATA STORE : Datestore created");
-        Logger.debug("CKAN : CREATE DATA STORE : Inserted data: \n" + orgs);
+        Logger.debug("CKAN : CREATE DATA STORE : Inserted data: \n" + dataStoreAnswer);
 
         // Add the JSON object
-        JSONObject jsonObject = new JSONObject(orgs).optJSONObject("result");
-        packages.put(object.optString("type"), jsonObject.optString("resource_id"));
+        JSONObject result = new JSONObject(dataStoreAnswer).optJSONObject("result");
+        packages.put(object.optString("type"), result.optString("resource_id"));
 
     }
 
@@ -301,56 +369,75 @@ public class Ckan implements Sink {
      */
     private void insertData(String resourceId, JSONObject object) throws IOException {
 
-        // Create the list of fields
-        JSONArray attributes = object.optJSONArray("attributes");
+        // The list of records to insert
         JSONArray records = new JSONArray();
+
+        // The current record to insert and add the name already
         JSONObject obj = new JSONObject();
         obj.put("name", object.optString("id"));
+
+        // Go through the list of attributes
+        JSONArray attributes = object.optJSONArray("attributes");
         for(int i = 0; i < attributes.length(); i++) {
+
+            // The current attribute
             JSONObject attribute = attributes.optJSONObject(i);
 
-            // Location
+            // If the attribute contains the location
             if(attribute.optString("name").equals("location")) {
-                JSONArray temp = attribute.optJSONArray("value");
-                for(int j = 0; j < temp.length(); j++) {
-                    JSONObject tem = temp.getJSONObject(j);
-                    obj.put(tem.optString("name"), Float.valueOf(tem.optString("value")));
+
+                // The location array to go through
+                JSONArray locationArray = attribute.optJSONArray("value");
+                for(int j = 0; j < locationArray.length(); j++) {
+
+                    // The current location and add it as a float
+                    JSONObject locationObject = locationArray.getJSONObject(j);
+                    obj.put(locationObject.optString("name"), Float.valueOf(locationObject.optString("value")));
+
                 }
+
             } else {
 
-                // The JSON object to insert
-                String type = attribute.optString("type");
-                if (type.equals("int") || type.equals("float")) {
-                    obj.put(attribute.optString("name"), Integer.parseInt(attribute.optString("value")));
-                } else if (type.equals("String") || type.equals("string")) {
-                    obj.put(attribute.optString("name"), attribute.optString("value"));
-                } else if (type.equals("array")) {
-                    obj.put(attribute.optString("name"), attribute.optJSONArray("value").toString());
-                } else if(type.equals("unix timestamp")) {
-                    obj.put(attribute.optString("name"), attribute.optLong("value"));
+                // Add the value
+                switch(attribute.optString("type")) {
+                    case "int":
+                    case "float":
+                        obj.put(attribute.optString("name"), attribute.optInt("value"));
+                        break;
+                    case "array":
+                        obj.put(attribute.optString("name"), attribute.optJSONArray("value").toString());
+                        break;
+                    case "unix timestamp":
+                        obj.put(attribute.optString("name"), attribute.optLong("value"));
+                        break;
+                    default:
+                        obj.put(attribute.optString("name"), attribute.optString("value"));
+                        break;
                 }
 
             }
         }
+
+        // Add the object with attributes
         records.put(obj);
 
         // Add the name
-        JSONObject data = new JSONObject();
-        data.put("resource_id", resourceId);
-        data.put("records", records);
-        data.put("method", "insert");
+        JSONObject dataToPost = new JSONObject();
+        dataToPost.put("resource_id", resourceId);
+        dataToPost.put("records", records);
+        dataToPost.put("method", "insert");
 
-        Logger.debug("CKAN : INSERT DATA : Data to insert: \n" + data.toString(4));
+        Logger.debug("CKAN : INSERT DATA : Data to insert: \n" + dataToPost.toString(4));
 
         // Create the organization
-        String orgs = new NetworkHelper(url + "/api/3/action/datastore_upsert")
+        String dataUpsertAnswer = new NetworkHelper(url + "/api/3/action/datastore_upsert")
                 .setPost()
                 .setHeader("Authorization", apiKey)
-                .setPostData(data.toString(4))
+                .setPostData(dataToPost.toString(4))
                 .response();
 
-        Logger.info("CKAN : INSERT DATA : Data inserted into CKAN");
-        Logger.debug("CKAN : INSERT DATA : Inserted data: \n" + orgs);
+        Logger.info("CKAN : INSERT DATA : Data inserted into CKAN for entity " + object.optString("id"));
+        Logger.debug("CKAN : INSERT DATA : Inserted data: \n" + dataUpsertAnswer);
 
     }
 

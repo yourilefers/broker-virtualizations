@@ -3,6 +3,7 @@ package org.opendoors.gemini.network;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.opendoors.gemini.common.Config;
+import org.opendoors.gemini.common.Constants;
 import org.opendoors.gemini.common.Logger;
 
 import java.io.IOException;
@@ -40,11 +41,26 @@ public class Orion {
         config = Config.getInstance();
 
         // Setup orion
-        if(config.get("orion_url", "").isEmpty()) {
+        if(config.get(Constants.CONFIG_ORION_URL, "").isEmpty()) {
             throw new Exception("The url of the Orion server has not been defined in config.conf. Please add 'orion_url' to your config.");
         } else {
-            url = config.get("orion_url");
+            url = config.get(Constants.CONFIG_ORION_URL);
         }
+
+        // Try to connect
+        connect();
+
+        // Setup arrays
+        types = new ArrayList<>();
+
+    }
+
+    /**
+     * Try to connect to the Orion server.
+     *
+     * @throws IOException
+     */
+    private void connect() throws IOException {
 
         // Try to connect
         String connectResult = new NetworkHelper(url + "/version").response();
@@ -57,9 +73,6 @@ public class Orion {
         JSONObject jsonObject = new JSONObject(connectResult).optJSONObject("orion");
         Logger.info("Found Orion version " + jsonObject.optString("version"));
 
-        // Setup arrays
-        types = new ArrayList<>();
-
     }
 
     /**
@@ -71,7 +84,7 @@ public class Orion {
 
         // Retrieve all types
         String connectResult = new NetworkHelper(url + "/v1/contextEntities").response();
-        Logger.debug("Orion index types result: " + connectResult);
+        Logger.debug("Orion index types result:\n" + new JSONObject(connectResult).toString(4));
         if(connectResult.isEmpty()) {
             throw new IOException("Orion did not respond correctly!");
         }
@@ -93,42 +106,65 @@ public class Orion {
      */
     public boolean subscribe() throws IOException {
 
+        // The JSON object to post
+        JSONObject dataToPost = new JSONObject();
+
+        // Add the reference
+        dataToPost.put("reference", config.get(Constants.CONFIG_SERVER_URL, Constants.CONFIG_SERVER_URL_DEFAULT) + ":" + config.get(Constants.CONFIG_SERVER_PORT, Integer.toString(Constants.CONFIG_SERVER_PORT_DEFAULT)));
+
+        // Add the duration
+        dataToPost.put("duration", "P1M");
+
+        // Throttling; how many calls per minute/second/etc.
+        dataToPost.put("throttling", "PT5S");
+
+        // Get the list of valid types
+        ArrayList<String> validTypes = getValidTypes();
+
         // Add all entity types
         JSONArray entities = new JSONArray();
+        JSONArray attributes = new JSONArray();
         for(int i = 0; i < types.size(); i++) {
 
-            // Add the thing
-            JSONObject entity = new JSONObject();
-            entity.put("type", types.get(i).optString("type"));
-            entity.put("isPattern", types.get(i).optString("isPattern"));
-            entity.put("id", types.get(i).optString("id"));
-            entities.put(entity);
+            // Get the type
+            String type = types.get(i).optString("type");
 
+            // In the list?
+            if(validTypes.size() == 0 || (validTypes.size() > 0 && validTypes.contains(type))) {
+
+                // Add the thing
+                JSONObject entity = new JSONObject();
+                entity.put("type", type);
+                entity.put("isPattern", types.get(i).optString("isPattern"));
+                entity.put("id", types.get(i).optString("id"));
+                entities.put(entity);
+
+                // Add the list of attributes
+                addAttributes(types.get(i).optJSONArray("attributes"), attributes);
+
+            }
         }
+        dataToPost.put("entities", entities);
+        dataToPost.put("attributes", attributes);
+
+        // Setup notify condition
+        dataToPost.put("notifyConditions", new JSONArray()
+                        .put(new JSONObject()
+                                        .put("type", "ONCHANGE")
+                                        .put("condValues", attributes)
+                        )
+        );
+
+        Logger.debug("Data to post:\n" + dataToPost.toString(4));
 
         // Subscribe to Orion
         String result = new NetworkHelper(url + "/v1/subscribeContext")
                 .setPost()
                 .setHeader("Content-Type", "application/json")
-                .setPostData("{\n" +
-                        "    \"entities\": " + entities.toString(4) + ",\n" +
-                        //"    \"attributes\": [\n" +
-                        //"        \"temperature\"\n" +
-                        //"    ],\n" +
-                        "    \"reference\": \"" + config.get("server_url", "http://localhost") + ":" + config.get("server_port", "2048") + "\",\n" +
-                        "    \"duration\": \"P1M\",\n" +
-                        "    \"notifyConditions\": [\n" +
-                        "        {\n" +
-                        "            \"type\": \"ONTIMEINTERVAL\",\n" +
-                        "            \"condValues\": [\n" +
-                        "                \"PT10S\"\n" +
-                        "            ]\n" +
-                        "        }\n" +
-                        "    ]\n" +
-                        "}")
+                .setPostData(dataToPost.toString())
                 .response();
         Logger.info("Subscribed to Orion");
-        Logger.debug("Orion answer: " + result);
+        Logger.debug("Orion answer:\n" + result);
 
         // Retrieve subscription ID
         JSONObject subscriptionObject = new JSONObject(result);
@@ -139,22 +175,80 @@ public class Orion {
     }
 
     /**
+     * Add attributes to an existing list of attributes.
+     *
+     * @param attributes
+     * @param existing
+     * @return
+     */
+    private JSONArray addAttributes(JSONArray attributes, JSONArray existing) {
+        ArrayList<String> existingArray = new ArrayList<>();
+        for(int i = 0; i < existing.length(); i++) {
+            existingArray.add(existing.getString(i));
+        }
+        for(int i = 0; i < attributes.length(); i++) {
+
+            // Get the attribute
+            String attribute = attributes.optJSONObject(i).optString("name");
+
+            // Added?
+            if(!existingArray.contains(attribute)) {
+                existing.put(attribute);
+            }
+
+        }
+        return existing;
+    }
+
+    /**
+     * Retrieve the list of valid types.
+     *
+     * @return
+     */
+    private ArrayList<String> getValidTypes() {
+
+        // The arraylist with the set of types
+        ArrayList<String> types = new ArrayList<>();
+
+        // Get the config
+        String configTypesRaw = config.get(Constants.CONFIG_ORION_ENTITIES, "");
+
+        // Check
+        if(!configTypesRaw.isEmpty()) {
+
+            // Split
+            String[] configTypesSplitted = configTypesRaw.split(",\\s*");
+
+            // Add all types
+            for(int i = 0; i < configTypesSplitted.length; i++) {
+                types.add(configTypesSplitted[i]);
+            }
+
+        }
+
+        return types;
+
+    }
+
+    /**
      * Make Gemini subscribe on Orion.
      */
     public boolean unsubscribe() throws IOException {
+
+        // The data to post
+        JSONObject dataToPost = new JSONObject()
+                .put("subscriptionId", subscriptionId);
 
         // Subscribe to Orion
         String result = new NetworkHelper(url + "/v1/unsubscribeContext")
                 .setPost()
                 .setHeader("Content-Type", "application/json")
-                .setPostData("{\n" +
-                        "  \"subscriptionId\": \"" + subscriptionId + "\"\n" +
-                        "}")
+                .setPostData(dataToPost.toString())
                 .response();
         Logger.info("Unsubscribed from Orion");
         Logger.debug(result);
-
         return false;
+
     }
 
     //
@@ -167,6 +261,30 @@ public class Orion {
      */
     public String getSubscriptionId() {
         return subscriptionId;
+    }
+
+    /**
+     * Get all type names
+     *
+     * @return
+     */
+    public ArrayList<String> typeNames() {
+
+        // The list to return
+        ArrayList<String> typeNames = new ArrayList<>();
+
+        for(int i = 0; i < types.size(); i++) {
+
+            // Get the type
+            JSONObject type = types.get(i);
+
+            // Add the name
+            if(!typeNames.contains(type.optString("type"))) typeNames.add(type.optString("type"));
+
+        }
+
+        return typeNames;
+
     }
 
 }

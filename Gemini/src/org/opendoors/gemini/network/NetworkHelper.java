@@ -3,6 +3,7 @@ package org.opendoors.gemini.network;
 import org.opendoors.gemini.common.Config;
 import org.opendoors.gemini.common.Constants;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Contributors:
@@ -20,7 +22,10 @@ import java.net.URL;
 public class NetworkHelper {
 
     // The connection object
-    private HttpURLConnection con;
+    private URLConnection con;
+
+    // Defined the secured state of the request
+    private boolean secured = false;
 
     /**
      * Initial setup
@@ -33,11 +38,30 @@ public class NetworkHelper {
         // Create the URL object
         URL obj = new URL(url);
 
+        // HTTPS or HTTP?
+        if(url.startsWith("https")) secured = true;
+
+        // Set the connection
+        con = secured ? (HttpsURLConnection) obj.openConnection() : (HttpURLConnection) obj.openConnection();
+
         // Setup connection
-        con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
+        setRequestMethod("GET");
         con.setRequestProperty("User-Agent", Config.getInstance().get("user_agent", Constants.NETWORK_USER_AGENT));
         con.setRequestProperty("Accept", "application/json");
+
+    }
+
+    /**
+     * Make a POST request.
+     *
+     * @return
+     * @throws ProtocolException
+     */
+    public NetworkHelper setRequestMethod(String method) throws ProtocolException {
+
+        // optional default is GET
+        (secured ? ((HttpsURLConnection) con) : ((HttpURLConnection) con)).setRequestMethod(method.toUpperCase());
+        return this;
 
     }
 
@@ -50,7 +74,7 @@ public class NetworkHelper {
     public NetworkHelper setPost() throws ProtocolException {
 
         // optional default is GET
-        con.setRequestMethod("POST");
+        setRequestMethod("POST");
         return this;
 
     }
@@ -94,7 +118,7 @@ public class NetworkHelper {
      * @return
      */
     public int statusCode() throws IOException {
-        return con.getResponseCode();
+        return (secured ? ((HttpsURLConnection) con) : ((HttpURLConnection) con)).getResponseCode();
     }
 
     /**
@@ -115,7 +139,7 @@ public class NetworkHelper {
             response.append(inputLine);
         }
         in.close();
-        con.disconnect();
+        (secured ? ((HttpsURLConnection) con) : ((HttpURLConnection) con)).disconnect();
 
         // Return the response
         return response.toString();

@@ -3,7 +3,9 @@ package org.opendoors.gemini.server;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.opendoors.gemini.Gemini;
+import org.opendoors.gemini.common.Config;
 import org.opendoors.gemini.common.Logger;
+import org.opendoors.gemini.exceptions.CloseClientException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +19,9 @@ import java.net.Socket;
  * @since v1.0
  */
 public class Client extends Thread {
+
+    // The server instance
+    private Server server;
 
     // The socket being used by the server
     private Socket socket;
@@ -34,7 +39,10 @@ public class Client extends Thread {
      * @param socket
      * @throws IOException
      */
-    public Client( Socket socket ) throws IOException {
+    public Client( Socket socket, Server server ) throws IOException {
+
+        // Svae the server
+        this.server = server;
 
         // Save the socket
         this.socket = socket;
@@ -60,7 +68,7 @@ public class Client extends Thread {
             String answer = "";
 
             // Wait for incoming messages
-            while(true) {
+            while(!this.isInterrupted() && !Config.getInstance().isExiting()) {
 
                 // Wait for input
                 String input = in.readLine();
@@ -78,22 +86,27 @@ public class Client extends Thread {
                     answer = "";
 
                 } else {
-                    throw new Exception("STOP SESSION");
+                    throw new CloseClientException("STOP SESSION");
                 }
 
             }
 
-        } catch ( Exception e ) {
+        } catch (IOException e) {
 
             // ERROR
-            Logger.error("SERVER : CLIENT : Exception occurred: " + e.getLocalizedMessage());
+            Logger.error("SERVER : CLIENT : Input read exception: " + e.getLocalizedMessage());
+
+        } catch (CloseClientException e) {
+
+            // ERROR
+            Logger.debug("SERVER : CLIENT : Client connection closed");
 
         } finally {
 
             try {
 
                 // Close socket
-                this.socket.close();
+                if(!socket.isClosed()) socket.close();
 
             } catch (IOException e) {
 
@@ -102,8 +115,17 @@ public class Client extends Thread {
 
             }
 
-            // Remove client
-            Gemini.getInstance().getServer().removeClient(this);
+            try {
+
+                // Remove client
+                server.removeClient(this);
+
+            } catch(NullPointerException e) {
+
+                // Oops?
+                Logger.error("SERVER : CLIENT : Could not remove client: " + e.getLocalizedMessage());
+
+            }
 
             // Final
             Logger.debug("SERVER : CLIENT : Connection closed with client.");
@@ -118,8 +140,6 @@ public class Client extends Thread {
      * @param request
      */
     public void parseRequest(String request) {
-
-        //Logger.debug("SERVER : CLIENT : Parsing request:\n" + request);
 
         // Trim the thing
         request = request.trim();
@@ -141,8 +161,6 @@ public class Client extends Thread {
 
         // Parse part 2 as an JSON object
         JSONObject body = new JSONObject(splittedRequest[1]);
-
-        //Logger.debug("SERVER : CLIENT : Request body:\n" + body.toString(4));
 
         // Check the subscription ID
         if(!body.optString("subscriptionId", "").equals(Gemini.getInstance().getOrion().getSubscriptionId())) {

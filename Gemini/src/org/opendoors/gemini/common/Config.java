@@ -17,6 +17,9 @@ public class Config {
     /** The config elements */
     private HashMap<String, String> config;
 
+    /** The exiting state */
+    private boolean exiting = false;
+
     /**
      * Private Config constructor. Will setup some stuff.
      */
@@ -125,8 +128,19 @@ public class Config {
         // Correct?
         if(splitted.length == 2 && !splitted[0].trim().isEmpty() && !splitted[1].trim().isEmpty()) {
 
+            // The string
+            String value = splitted[1].trim();
+
+            // Starting as a string?
+            if(value.startsWith("\"")) {
+
+                // Parse the string
+                value = value.substring(1, value.length() - 1);
+
+            }
+
             // Save the values
-            config.put(splitted[0].trim(), splitted[1].trim());
+            config.put(splitted[0].trim(), value);
 
         } else if(splitted.length == 1 && !splitted[0].trim().isEmpty()) {
 
@@ -155,6 +169,21 @@ public class Config {
      */
     public String get(String key, String def) {
         return config == null ? null : config.getOrDefault(key, def);
+    }
+
+    /**
+     * Get the exiting state of the application.
+     * @return
+     */
+    public boolean isExiting() {
+        return this.exiting;
+    }
+
+    /**
+     * Set exiting.
+     */
+    public void setExiting() {
+        this.exiting = true;
     }
 
 }
