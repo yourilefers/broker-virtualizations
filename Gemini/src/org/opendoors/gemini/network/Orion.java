@@ -116,7 +116,7 @@ public class Orion {
         dataToPost.put("duration", "P1M");
 
         // Throttling; how many calls per minute/second/etc.
-        dataToPost.put("throttling", "PT5S");
+        dataToPost.put("throttling", "PT0S");
 
         // Get the list of valid types
         ArrayList<String> validTypes = getValidTypes();
@@ -231,9 +231,18 @@ public class Orion {
     }
 
     /**
-     * Make Gemini subscribe on Orion.
+     * Unsubscribe Orion.
+     * @return
+     * @throws IOException
      */
     public boolean unsubscribe() throws IOException {
+        return unsubscribe(subscriptionId);
+    }
+
+    /**
+     * Make Gemini subscribe on Orion.
+     */
+    public boolean unsubscribe(String subscriptionId) throws IOException {
 
         // The data to post
         JSONObject dataToPost = new JSONObject()

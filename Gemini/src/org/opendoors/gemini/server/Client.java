@@ -7,10 +7,9 @@ import org.opendoors.gemini.common.Config;
 import org.opendoors.gemini.common.Logger;
 import org.opendoors.gemini.exceptions.CloseClientException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
 
 /**
  * Contributors:
@@ -28,6 +27,9 @@ public class Client extends Thread {
 
     // Reader for input from the client
     private BufferedReader in;
+
+    // Reader for input from the client
+    private PrintWriter out;
 
     //
     // Functions
@@ -49,6 +51,7 @@ public class Client extends Thread {
 
         // Setup
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out = new PrintWriter(socket.getOutputStream(), true);
 
     }
 
@@ -86,6 +89,10 @@ public class Client extends Thread {
                     answer = "";
 
                 } else {
+
+                    // Write back OK
+                    out.println(0);
+                    out.flush();
                     throw new CloseClientException("STOP SESSION");
                 }
 
@@ -94,7 +101,8 @@ public class Client extends Thread {
         } catch (IOException e) {
 
             // ERROR
-            Logger.error("SERVER : CLIENT : Input read exception: " + e.getLocalizedMessage());
+            Logger.error("SERVER : CLIENT : IO | Input read exception: " + e.getLocalizedMessage());
+            Logger.error("SERVER : CLIENT : IO |\n" + Arrays.toString(e.getStackTrace()));
 
         } catch (CloseClientException e) {
 
@@ -105,13 +113,18 @@ public class Client extends Thread {
 
             try {
 
+                // Close all
+                in.close();
+                out.close();
+
                 // Close socket
                 if(!socket.isClosed()) socket.close();
 
             } catch (IOException e) {
 
                 // ERROR
-                Logger.error("SERVER : CLIENT : Could not close the connections: " + e.getLocalizedMessage());
+                Logger.error("SERVER : CLIENT : IO | Could not close the connections: " + e.getLocalizedMessage());
+                Logger.error("SERVER : CLIENT : IO |\n" + Arrays.toString(e.getStackTrace()));
 
             }
 
@@ -123,7 +136,8 @@ public class Client extends Thread {
             } catch(NullPointerException e) {
 
                 // Oops?
-                Logger.error("SERVER : CLIENT : Could not remove client: " + e.getLocalizedMessage());
+                Logger.error("SERVER : CLIENT : NULL | Could not remove client: " + e.getLocalizedMessage());
+                Logger.error("SERVER : CLIENT : NULL |\n" + Arrays.toString(e.getStackTrace()));
 
             }
 
@@ -164,7 +178,18 @@ public class Client extends Thread {
 
         // Check the subscription ID
         if(!body.optString("subscriptionId", "").equals(Gemini.getInstance().getOrion().getSubscriptionId())) {
-            Logger.error("SERVER : CLIENT : REJECTED : Invalid subscription ID");
+            try {
+
+                Logger.debug("SERVER : CLIENT : REJECTED : Invalid subscription ID. Unsubscribing this id...");
+                Gemini.getInstance().getOrion().unsubscribe(body.optString("subscriptionId", ""));
+
+            } catch(IOException e) {
+
+                // Debug
+                Logger.debug("Could not unsubscribe the invalid ID | " + e.getLocalizedMessage());
+
+            }
+
             return;
         }
 

@@ -39,7 +39,8 @@ public class Gemini {
     public static void main(String[] args) {
 
         // Start the main class
-        Gemini.getInstance();
+        Gemini gem = Gemini.getInstance();
+        gem.getMenu().showMenu();
 
     }
 
@@ -62,9 +63,6 @@ public class Gemini {
 
         // Setup everything
         setup();
-
-        // Go to the home menu
-        menu.showMenu();
 
     }
 
@@ -96,7 +94,8 @@ public class Gemini {
                 server = null;
 
             } catch (IOException e) {
-                Logger.error("Could not stop orion: " + e.getLocalizedMessage());
+                Logger.error("GEMINI | Could not stop orion: " + e.getLocalizedMessage());
+                Logger.error("GEMINI |\n" + Arrays.toString(e.getStackTrace()));
             }
         }
 
@@ -200,8 +199,8 @@ public class Gemini {
         } catch(Exception e) {
 
             // Oops
-            e.printStackTrace();
-            Logger.error(e.getLocalizedMessage(), true);
+            Logger.error("GEMINI | INIT ORION | " + e.getLocalizedMessage());
+            Logger.error("GEMINI | INIT ORION |\n" + Arrays.toString(e.getStackTrace()), true);
             return false;
 
         }
@@ -226,8 +225,8 @@ public class Gemini {
         } catch(Exception e) {
 
             // Oops
-            e.printStackTrace();
-            Logger.error(e.getLocalizedMessage(), true);
+            Logger.error("GEMINI | INIT CKAN | " + e.getLocalizedMessage());
+            Logger.error("GEMINI | INIT CKAN |\n" + Arrays.toString(e.getStackTrace()), true);
             return false;
 
         }
@@ -269,8 +268,8 @@ public class Gemini {
             orion.subscribe();
 
         } catch(IOException e) {
-            e.printStackTrace();
-            Logger.error("Orion exception: " + e.getLocalizedMessage(), true);
+            Logger.error("GEMINI | Orion exception: " + e.getLocalizedMessage());
+            Logger.error("GEMINI |\n" + Arrays.toString(e.getStackTrace()), true);
         }
 
     }
@@ -294,8 +293,8 @@ public class Gemini {
             Logger.info("All registered types in orion:\n" + Arrays.toString(orion.typeNames().toArray()));
 
         } catch(IOException e) {
-            e.printStackTrace();
-            Logger.error("Orion exception: " + e.getLocalizedMessage(), true);
+            Logger.error("GEMINI | Orion exception: " + e.getLocalizedMessage());
+            Logger.error("GEMINI |\n" + Arrays.toString(e.getStackTrace()), true);
         }
 
     }
@@ -329,6 +328,14 @@ public class Gemini {
      */
     public Server getServer() {
         return server;
+    }
+
+    /**
+     * Get the menu instance
+     * @return
+     */
+    public Menu getMenu() {
+        return menu;
     }
 
 }

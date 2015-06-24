@@ -6,10 +6,12 @@ import org.opendoors.gemini.common.Logger;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.SocketException;
 import java.nio.channels.ClosedByInterruptException;
 import java.nio.channels.InterruptibleChannel;
 import java.nio.channels.Selector;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Contributors:
@@ -25,17 +27,27 @@ public class Server extends Thread {
     /** The server socket */
     private ServerSocket serverSocket;
 
+    /** The configuration instance */
+    private Config config;
+
+    /**
+     * Server constructor.
+     */
+    public Server() {
+
+        // Setup vars
+        config = Config.getInstance();
+
+        // Setup list of clients
+        clients = new ArrayList<>();
+
+    }
+
     /**
      * Setup the server.
      */
     @Override
     public void run() {
-
-        // Setup vars
-        Config config = Config.getInstance();
-
-        // Setup list of clients
-        clients = new ArrayList<>();
 
         try {
 
@@ -49,7 +61,7 @@ public class Server extends Thread {
 
             try {
 
-                while(!this.isInterrupted() && !Config.getInstance().isExiting()) {
+                while (!isInterrupted() && !Config.getInstance().isExiting()) {
 
                     // Create new client
                     Client client = new Client(serverSocket.accept(), this);
@@ -64,22 +76,38 @@ public class Server extends Thread {
 
                 }
 
+            } catch(SocketException e) {
+
+                // Debug
+                Logger.debug("Socket closed while waiting for accept.");
+
             } finally {
 
                 // Close all existing clients
                 for(int i = 0; i < clients.size(); i++) {
-                    clients.get(i).interrupt();
+                    if(!clients.get(i).isInterrupted()) clients.get(i).interrupt();
                 }
 
-                // Close socket
-                if(!serverSocket.isClosed()) serverSocket.close();
+                try {
+
+                    // Close socket
+                    if(!serverSocket.isClosed()) serverSocket.close();
+
+                } catch (IOException e) {
+
+                    // Error
+                    Logger.error("SERVER : Could not create/close socket: " + e.getLocalizedMessage());
+                    Logger.error("SERVER :\n" + Arrays.toString(e.getStackTrace()));
+
+                }
 
             }
 
         } catch (IOException e) {
 
             // Error
-            Logger.error("SERVER : Could not create/close socket: " + e.getLocalizedMessage());
+            Logger.error("SERVER : IO exception: " + e.getLocalizedMessage());
+            Logger.error("SERVER :\n" + Arrays.toString(e.getStackTrace()));
 
         }
 
@@ -90,7 +118,7 @@ public class Server extends Thread {
      * @param client
      */
     public void removeClient(Client client) {
-        client.interrupt();
+        if(!client.isInterrupted()) client.interrupt();
         clients.remove(client);
     }
 
@@ -141,14 +169,14 @@ public class Server extends Thread {
         } catch(IOException e) {
 
             // Error
-            e.printStackTrace();
-            Logger.error("Could not close the server socket on interrupt: " + e.getLocalizedMessage());
+            Logger.error("SERVER | Could not close the server socket on interrupt: " + e.getLocalizedMessage());
+            Logger.error("SERVER |\n" + Arrays.toString(e.getStackTrace()));
 
         }
 
         // Stop all clients
         for(int i = 0; i < clients.size(); i++) {
-            clients.get(i).interrupt();
+            if(!clients.get(i).isInterrupted()) clients.get(i).interrupt();
         }
 
         // Continue interrupt

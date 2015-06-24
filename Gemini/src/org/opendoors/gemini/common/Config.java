@@ -182,8 +182,8 @@ public class Config {
     /**
      * Set exiting.
      */
-    public void setExiting() {
-        this.exiting = true;
+    public void setExiting(boolean state) {
+        this.exiting = state;
     }
 
 }

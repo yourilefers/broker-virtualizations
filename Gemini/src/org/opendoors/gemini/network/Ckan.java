@@ -199,7 +199,8 @@ public class Ckan {
             } catch(IOException e) {
 
                 // Oops?
-                Logger.error("CKAN (" + e.getMessage() + ") : Could not create the package: " + e.getLocalizedMessage());
+                Logger.error("CKAN : Could not create the package: " + e.getLocalizedMessage());
+                Logger.error("CKAN :\n" + Arrays.toString(e.getStackTrace()));
 
             }
             try {
@@ -211,6 +212,7 @@ public class Ckan {
 
                 // Oops?
                 Logger.error("CKAN : Could not create the data store: " + e.getLocalizedMessage());
+                Logger.error("CKAN :\n" + Arrays.toString(e.getStackTrace()));
 
             }
         }
@@ -223,13 +225,15 @@ public class Ckan {
         } catch(IOException e) {
 
             // Oops?
-            Logger.error("CKAN : Could not insert the data: " + e.getLocalizedMessage());
+            Logger.error("CKAN : PUBLISH : IO | Could not insert the data: " + e.getLocalizedMessage());
+            Logger.error("CKAN : PUBLISH : IO |\n" + Arrays.toString(e.getStackTrace()));
 
         } catch(NullPointerException e) {
 
             // Oops?
-            Logger.error("CKAN : INSERT : Null pointer: " + e.getLocalizedMessage());
             e.printStackTrace();
+            Logger.error("CKAN : PUBLISH : Null | " + e.getLocalizedMessage());
+            Logger.error("CKAN : PUBLISH : Null |\n" + Arrays.toString(e.getStackTrace()));
 
         }
 

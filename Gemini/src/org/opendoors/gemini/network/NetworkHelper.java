@@ -129,6 +129,15 @@ public class NetworkHelper {
      */
     public String response() throws IOException {
 
+        // Get the status code
+        int status = statusCode();
+
+        // Check the status code
+        if(!checkStatus(status)) {
+            close();
+            throw new IOException("Invalid status code: " + status);
+        }
+
         // Setup buffer
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -139,11 +148,28 @@ public class NetworkHelper {
             response.append(inputLine);
         }
         in.close();
-        (secured ? ((HttpsURLConnection) con) : ((HttpURLConnection) con)).disconnect();
+        close();
 
         // Return the response
         return response.toString();
 
+    }
+
+    /**
+     * Chekc the status code.
+     *
+     * @param status The curren status code
+     * @return False when invalid
+     */
+    private boolean checkStatus(int status) {
+        return status < 300;
+    }
+
+    /**
+     * Close the connection.
+     */
+    public void close() {
+        (secured ? ((HttpsURLConnection) con) : ((HttpURLConnection) con)).disconnect();
     }
 
 }

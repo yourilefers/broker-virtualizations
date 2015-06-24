@@ -42,6 +42,7 @@ public class Menu {
 
         // Go to home
         showMenu();
+
     }
 
     /**
@@ -80,7 +81,7 @@ public class Menu {
     public void exit() {
 
         // Exit
-        Config.getInstance().setExiting();
+        Config.getInstance().setExiting(true);
         System.out.println("Gemini closing. Goodbye.");
         gemini.exit();
 
