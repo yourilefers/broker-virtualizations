@@ -282,6 +282,7 @@ public class Ckan {
 
         // Create the list of fields
         JSONArray fields = new JSONArray();
+        JSONArray primaryKeys = new JSONArray();
 
         // Add the name field for identification
         fields.put(new JSONObject().put("id", "name").put("type", "text"));
@@ -339,12 +340,18 @@ public class Ckan {
                 fields.put(obj);
             }
 
+            // Setup primary keys
+            if(attribute.optString("name").equals("last_update")) {
+                primaryKeys.put("last_update");
+            }
+
         }
 
         // Add the name
         JSONObject dataToPost = new JSONObject();
         dataToPost.put("fields", fields);
         dataToPost.put("resource", new JSONObject().put("package_id", packageId));
+        dataToPost.put("primary_key", primaryKeys);
 
         Logger.debug("CKAN : CREATE DATA STORE : Data to insert: \n" + dataToPost.toString(4));
 

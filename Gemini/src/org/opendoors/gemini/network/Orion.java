@@ -115,15 +115,11 @@ public class Orion {
         // Add the duration
         dataToPost.put("duration", "P1M");
 
-        // Throttling; how many calls per minute/second/etc.
-        dataToPost.put("throttling", "PT0S");
-
         // Get the list of valid types
         ArrayList<String> validTypes = getValidTypes();
 
         // Add all entity types
         JSONArray entities = new JSONArray();
-        JSONArray attributes = new JSONArray();
         for(int i = 0; i < types.size(); i++) {
 
             // Get the type
@@ -139,19 +135,17 @@ public class Orion {
                 entity.put("id", types.get(i).optString("id"));
                 entities.put(entity);
 
-                // Add the list of attributes
-                addAttributes(types.get(i).optJSONArray("attributes"), attributes);
-
             }
         }
         dataToPost.put("entities", entities);
-        dataToPost.put("attributes", attributes);
 
         // Setup notify condition
         dataToPost.put("notifyConditions", new JSONArray()
                         .put(new JSONObject()
-                                        .put("type", "ONCHANGE")
-                                        .put("condValues", attributes)
+                                        .put("type", "ONTIMEINTERVAL")
+                                        .put("condValues", new JSONArray()
+                                            .put("PT10S")
+                                        )
                         )
         );
 
