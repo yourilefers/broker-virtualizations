@@ -1,9 +1,17 @@
 package org.opendoors;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Random;
 
 /**
@@ -11,7 +19,7 @@ import java.util.Random;
  */
 public class Building {
     private Random r = new Random();
-    private int lastTemp = r.nextInt(25-0) + 0;
+    private int lastTemp;
     private String name;
     private float lat;
     private float lng;
@@ -51,7 +59,7 @@ public class Building {
             attributes.put(new JSONObject()
                     .put("name", "temperature")
                     .put("type", "float")
-                    .put("value", getTemperature() + ""));
+                    .put("value", lastTemp + ""));
 
             // Timestamp
             attributes.put(new JSONObject()
@@ -96,24 +104,7 @@ public class Building {
         return null;
     }
 
-    /**
-     * Get the current temperature from this object
-     * @return temperature as integer
-     */
-    private int getTemperature() {
-        int high;
-        int low;
-
-        if(lastTemp - 3 > - 3) // If temp can be lower, set low to curr - 3
-            low = lastTemp - 3;
-        else // Else temp is already too low, set low to 0
-            low = 0;
-        if(lastTemp + 3 < 30) // If temp may be higher, set max to curr + 3
-            high = lastTemp + 3;
-        else // Else temp is already too high, set max to 25
-            high = 25;
-
-        lastTemp = r.nextInt(high-low) + low;
-        return lastTemp;
+    public void setLastTemp(int lastTemp) {
+        this.lastTemp = lastTemp;
     }
 }
